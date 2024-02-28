@@ -28,3 +28,7 @@ bash reverse shell example
 ## Real world examples
 1. BrokenSesame vulberability in alibaba PostGreSQl databases
     - 
+
+
+# 390 Project 
+The idea behind our project would be to find and aggregate reverse shell implementations. This would allow various vulnerabilities to be patched.
