@@ -34,6 +34,67 @@ with app.app_context():
     db.create_all()
 
 
+def main():
+    os.system("clear")
+    print("Welcome to...\n")
+    print(" $$\       $$\       $$$$$$$$\ $$\   $$\  $$$$$$\  \n",
+          "$$ |      $$ |      $$  _____|$$ |  $$ |$$  __$$\ \n",
+          "$$ |      $$ |      $$ |      $$ |  $$ |$$ /  \__|\n",
+          "$$ |      $$ |      $$$$$\    $$$$$$$$ |\$$$$$$\  \n",
+          "$$ |      $$ |      $$  __|   $$  __$$ | \____$$\ \n",
+          "$$ |      $$ |      $$ |      $$ |  $$ |$$\   $$ |\n",
+          "$$$$$$$$\ $$$$$$$$\ $$$$$$$$\ $$ |  $$ |\$$$$$$  |\n",
+          "\________|\________|\________|\__|  \__| \______/ \n\n",
+          "                            ","*pssst its shell in reverse x x\n",
+          "                                                        "," U \n")
+    print("Please select one:\n")
+    print("[1] - [C]onnect")
+    print("[2] - [G]enerate RS")
+    print("[3] - [L]ist shells")
+    print("[4] - [M]anage shells")
+    print("[5] - [P]ayload Generator")
+    print("[9] - [H]elp")
+    print("[0] - [E]xit\n")
+    while(True):
+        try:
+            userInput = input(": ")
+            if userInput == "0" or userInput.lower() == "e" or userInput.lower() == "exit":
+                print("GoodBye")
+                break
+
+            elif userInput == "1" or userInput.lower() == "c" or userInput.lower() == "connect":
+                print("work in progress/1")
+
+            elif userInput == "2" or userInput.lower() == "g" or userInput.lower() == "generate":
+                generate()
+
+            elif userInput == "3" or userInput.lower() == "l" or userInput.lower() == "list":
+                print("work in progress/3")
+
+            elif userInput == "4" or userInput.lower() == "m" or userInput.lower() == "manage":
+                print("work in progress/4")
+
+            elif userInput == "5" or userInput.lower() == "p" or userInput.lower() == "payload":
+                print("work in progress/5")
+
+            elif userInput == "9" or userInput.lower() == "h" or userInput.lower() == "help":
+                print("Help")
+
+            else:
+                print("Invalid choice")
+                continue
+
+        except KeyboardInterrupt:
+            os.system("clear")
+            time.sleep(2)
+            print("Why you trying to leave...")
+            time.sleep(2)
+            print("YOUR STUCK HERE...")
+            time.sleep(5)
+            print("JK")
+            break
+
+
 # Listener and handler for one, multiple, or all shells
 def listener():
     pass
@@ -247,50 +308,4 @@ def help():
 
 
 if __name__ == "__main__":
-    os.system("clear")
-    print("Welcome to...\n")
-    print(" $$\       $$\       $$$$$$$$\ $$\   $$\  $$$$$$\  \n",
-          "$$ |      $$ |      $$  _____|$$ |  $$ |$$  __$$\ \n",
-          "$$ |      $$ |      $$ |      $$ |  $$ |$$ /  \__|\n",
-          "$$ |      $$ |      $$$$$\    $$$$$$$$ |\$$$$$$\  \n",
-          "$$ |      $$ |      $$  __|   $$  __$$ | \____$$\ \n",
-          "$$ |      $$ |      $$ |      $$ |  $$ |$$\   $$ |\n",
-          "$$$$$$$$\ $$$$$$$$\ $$$$$$$$\ $$ |  $$ |\$$$$$$  |\n",
-          "\________|\________|\________|\__|  \__| \______/ \n\n",
-          "                            ","*pssst its shell in reverse x x\n",
-          "                                                        "," U \n")
-    print("Please select one:\n")
-    print("[1] - [C]onnect")
-    print("[2] - [G]enerate RS")
-    print("[3] - [L]ist shells")
-    print("[4] - [M]anage shells")
-    print("[9] - [H]elp")
-    print("[0] - [E]xit\n")
-    while(True):
-        try:
-            userInput = input(": ")
-            if userInput == "0" or userInput.lower() == "e" or userInput.lower() == "exit":
-                print("GoodBye")
-                break
-            elif userInput == "1" or userInput.lower() == "c" or userInput.lower() == "connect":
-                print("work in progress/1")
-            elif userInput == "2" or userInput.lower() == "g" or userInput.lower() == "generate":
-                generate()
-            elif userInput == "3" or userInput.lower() == "l" or userInput.lower() == "list":
-                print("work in progress/3")
-            elif userInput == "4" or userInput.lower() == "m" or userInput.lower() == "manage":
-                print("work in progress/4")
-            elif userInput == "9" or userInput.lower() == "h" or userInput.lower() == "help":
-                print("Help")
-            else:
-                print("WRONG")
-                continue
-        except KeyboardInterrupt:
-            os.system("clear")
-            time.sleep(2)
-            print("Why you trying to leave...")
-            time.sleep(2)
-            print("YOUR STUCK HERE...")
-            time.sleep(5)
-            print("JK")
-            break
+    main()
